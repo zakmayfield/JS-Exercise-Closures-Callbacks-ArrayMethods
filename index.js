@@ -18,6 +18,7 @@ function processFirstItem(stringList, callback) {
   return callback(stringList[0])
 }
 
+
 // ⭐️ Example Challenge END ⭐️
 
 
@@ -27,6 +28,11 @@ function processFirstItem(stringList, callback) {
 
 /////////////// CALLBACKS AND HIGHER-ORDER FUNCTIONS ///////////////
 /////////////// CALLBACKS AND HIGHER-ORDER FUNCTIONS ///////////////
+
+
+
+
+
 
 /**
  * ### Challenge `processLength`
@@ -48,9 +54,28 @@ function processFirstItem(stringList, callback) {
  * [2] Invoking `processLength` passing `[]` and `(num) => "There are " + num`,
  * should return "There are 0".
 */
-function processLength(/* CODE HERE */) {
-  /* CODE HERE */
+
+let vehicles = ['ford', 'chevy', 'tesla', 'corvette', 'honda'];
+let emptyArr = [];
+
+function processLength(list, callback) {
+  return callback(list.length);
 }
+
+function howLong(arr){
+  return `There are: ${arr} items in this Array.`;
+}
+
+console.log('First challenge BELOW*****');
+console.log(processLength(vehicles, howLong)); // There are: 5 items in this Array.
+console.log(processLength(emptyArr, howLong)); // There are: 0 items in this Array.
+console.log('END OF FIRST CHALLENGE*****');
+
+
+
+
+
+
 
 /**
  * ### Challenge `processLastItem`
@@ -66,9 +91,25 @@ function processLength(/* CODE HERE */) {
  * Invoking `processLastItem` passing `['foo', 'bar']` and `(str) => str + str`,
  * should return 'barbar'.
 */
-function processLastItem(/* CODE HERE */) {
-  /* CODE HERE */
-}
+
+let moreVehicles = ['ford', 'chevy', 'tesla', 'corvette', 'honda'];
+
+function processLastItem(stringList, callback) {
+  return callback(stringList);
+};
+
+function lastItem(item){
+  return item.pop();
+};
+
+let doubleStr = str => str + str;
+
+console.log('Second challenge BELOW*****');
+console.log(processLastItem(moreVehicles, lastItem));
+console.log('END OF SECOND CHALLENGE*****');
+
+
+
 
 /**
  * ### Challenge `processSum`
@@ -90,6 +131,11 @@ function processLastItem(/* CODE HERE */) {
 function processSum(/* CODE HERE */) {
   /* CODE HERE */
 }
+
+
+
+
+
 
 /**
  * ### Challenge `processProduct`
