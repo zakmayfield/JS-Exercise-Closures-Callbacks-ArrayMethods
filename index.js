@@ -66,10 +66,9 @@ function howLong(arr){
   return `There are: ${arr} items in this Array.`;
 }
 
-console.log('First challenge BELOW*****');
 console.log(processLength(vehicles, howLong)); // There are: 5 items in this Array.
 console.log(processLength(emptyArr, howLong)); // There are: 0 items in this Array.
-console.log('END OF FIRST CHALLENGE*****');
+
 
 
 
@@ -95,18 +94,15 @@ console.log('END OF FIRST CHALLENGE*****');
 let moreVehicles = ['ford', 'chevy', 'tesla', 'corvette', 'honda'];
 
 function processLastItem(stringList, callback) {
-  return callback(stringList);
-};
-
-function lastItem(item){
-  return item.pop();
+  return callback(stringList.pop());
 };
 
 let doubleStr = str => str + str;
+let caps = str => str.toUpperCase();
 
-console.log('Second challenge BELOW*****');
-console.log(processLastItem(moreVehicles, lastItem));
-console.log('END OF SECOND CHALLENGE*****');
+
+console.log(processLastItem(moreVehicles, doubleStr));
+
 
 
 
@@ -128,9 +124,15 @@ console.log('END OF SECOND CHALLENGE*****');
  * [2] Invoking `processSum` passing `[]` and `(num) => num + 1000`,
  * should return 1000.
 */
-function processSum(/* CODE HERE */) {
-  /* CODE HERE */
-}
+let nums = [10, 20, 30];
+
+function processSum(numberList, callback) {
+  return callback(numberList.reduce((accumulator, currentVal) => accumulator + currentVal, 0));
+};
+
+let bigNumStr = (num) => num + " is a big number!";
+
+console.log(processSum(nums, bigNumStr));
 
 
 
@@ -155,9 +157,16 @@ function processSum(/* CODE HERE */) {
  * [2] Invoking `processProduct` passing 25 and 0 and `(num) => num + 1000`,
  * should return 1000.
 */
-function processProduct(/* CODE HERE */) {
-  /* CODE HERE */
+function processProduct(num1, num2, callback) {
+  return callback(num1 * num2);
 }
+
+console.log(processProduct(2, 7, (num) => num + " is a big number!"));
+
+
+
+
+
 
 /**
  * ### Challenge `processContains`
@@ -179,9 +188,30 @@ function processProduct(/* CODE HERE */) {
  * "lady gaga" and `['foo', 'bar']` and `(bool) => bool ? 'nice!' : 'sad'`,
  * should return "sad".
 */
-function processContains(/* CODE HERE */) {
-  /* CODE HERE */
+
+//.filter((element) => element)
+function processContains(item, list, callback) {
+    return callback(list.includes(item));
 }
+
+function doesContain(item, list){
+  return list.includes(item);
+  // for(let i = 0; i < list.length; i++){
+  //   if(list[i] === item){
+  //     return "nice!";
+  //   }
+  // }
+  // return "sad!";
+};
+
+let isTrueOrNot = (isTrue) => isTrue ? 'nice!' : 'sad';
+
+console.log(processContains("lady gaga", ['foo', 'bar'], (bool) => bool ? 'nice!' : 'sad'));
+
+
+
+
+
 
 /**
  * ### Challenge `processDuplicateFree`
@@ -202,9 +232,21 @@ function processContains(/* CODE HERE */) {
  * [2] Invoking `processDuplicateFree` passing `[1,1,2,2,3]` and `(arr) => arr.length`,
  * should return 3.
 */
-function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */) {
-  /* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */
+function processDuplicateFree(list, callback) {
+  let newArr = callback(list.filter((item, index) =>{
+      return list.indexOf(item) === index;
+      }
+    )
+  );
+  return newArr;
 }
+
+console.log(processDuplicateFree([1,1,1,2], (arr) => arr));
+
+
+
+
+
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -213,6 +255,62 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
 // 50 small businesses to make a small donation on their behalf for some much needed
 // updates to their facilities. Each business has assigned a representative
 // to attend the event along with a small donation.
+
+
+let runners = [
+  { id: 1, first_name: "Charmain", last_name: "Seiler", email: "cseiler0@wired.com", shirt_size: "2XL", company_name: "Divanoodle", donation: 75 },
+  { id: 2, first_name: "Whitaker", last_name: "Ierland", email: "wierland1@angelfire.com", shirt_size: "2XL", company_name: "Wordtune", donation: 148 },
+  { id: 3, first_name: "Julieta", last_name: "McCloid", email: "jmccloid2@yahoo.com", shirt_size: "S", company_name: "Riffpedia", donation: 171 },
+  { id: 4, first_name: "Martynne", last_name: "Paye", email: "mpaye3@sciencedaily.com", shirt_size: "XL", company_name: "Wordware", donation: 288 },
+  { id: 5, first_name: "Gussy", last_name: "Raraty", email: "graraty4@ucoz.ru", shirt_size: "L", company_name: "Oozz", donation: 291 },
+  { id: 6, first_name: "Yule", last_name: "Tommasetti", email: "ytommasetti5@state.gov", shirt_size: "S", company_name: "Yodo", donation: 27 },
+  { id: 7, first_name: "Kathie", last_name: "Majury", email: "kmajury6@guardian.co.uk", shirt_size: "3XL", company_name: "Zoomcast", donation: 261 },
+  { id: 8, first_name: "Tanner", last_name: "Branton", email: "tbranton7@tmall.com", shirt_size: "2XL", company_name: "Realmix", donation: 28 },
+  { id: 9, first_name: "Sarina", last_name: "Lasham", email: "slasham8@toplist.cz", shirt_size: "XL", company_name: "Gigashots", donation: 110 },
+  { id: 10, first_name: "Bertie", last_name: "Lonergan", email: "blonergan9@issuu.com", shirt_size: "3XL", company_name: "Skinte", donation: 62 },
+  { id: 11, first_name: "Trevor", last_name: "Studd", email: "tstudda@networkadvertising.org", shirt_size: "S", company_name: "Cogidoo", donation: 76 },
+  { id: 12, first_name: "Malachi", last_name: "Okeshott", email: "mokeshottb@chron.com", shirt_size: "M", company_name: "DabZ", donation: 91 },
+  { id: 13, first_name: "Berget", last_name: "Logsdail", email: "blogsdailc@wix.com", shirt_size: "M", company_name: "Mymm", donation: 9 },
+  { id: 14, first_name: "Loise", last_name: "Rivlin", email: "lrivlind@behance.net", shirt_size: "2XL", company_name: "Linktype", donation: 204 },
+  { id: 15, first_name: "Christan", last_name: "Kendall", email: "ckendalle@example.com", shirt_size: "XS", company_name: "Skinix", donation: 252 },
+  { id: 16, first_name: "Kayla", last_name: "Whitwam", email: "kwhitwamf@deliciousdays.com", shirt_size: "2XL", company_name: "Oyope", donation: 147 },
+  { id: 17, first_name: "Heddie", last_name: "Heningam", email: "hheningamg@tripadvisor.com", shirt_size: "L", company_name: "Skinix", donation: 172 },
+  { id: 18, first_name: "Mace", last_name: "Ballinger", email: "mballingerh@a8.net", shirt_size: "S", company_name: "Nlounge", donation: 266 },
+  { id: 19, first_name: "Nola", last_name: "Abberley", email: "nabberleyi@jalbum.net", shirt_size: "XL", company_name: "Photospace", donation: 148 },
+  { id: 20, first_name: "Nadine", last_name: "Tresler", email: "ntreslerj@marketwatch.com", shirt_size: "3XL", company_name: "Wikido", donation: 292 },
+  { id: 21, first_name: "Ulrikaumeko", last_name: "Vuittet", email: "uvuittetk@gov.uk", shirt_size: "S", company_name: "Skinte", donation: 102 },
+  { id: 22, first_name: "Saunder", last_name: "Spennock", email: "sspennockl@icq.com", shirt_size: "3XL", company_name: "Kwimbee", donation: 213 },
+  { id: 23, first_name: "Carmel", last_name: "Woffinden", email: "cwoffindenm@wikispaces.com", shirt_size: "S", company_name: "Rooxo", donation: 137 },
+  { id: 24, first_name: "Marielle", last_name: "Kimmel", email: "mkimmeln@jimdo.com", shirt_size: "M", company_name: "Livetube", donation: 96 },
+  { id: 25, first_name: "Brucie", last_name: "Burris", email: "bburriso@slate.com", shirt_size: "2XL", company_name: "Wordtune", donation: 128 },
+  { id: 26, first_name: "Juan", last_name: "Berzon", email: "jberzonp@soup.io", shirt_size: "3XL", company_name: "Einti", donation: 234 },
+  { id: 27, first_name: "Sacha", last_name: "Olsen", email: "solsenq@reverbnation.com", shirt_size: "2XL", company_name: "Viva", donation: 190 },
+  { id: 28, first_name: "Jamey", last_name: "O'Nolan", email: "jonolanr@samsung.com", shirt_size: "XL", company_name: "Skinix", donation: 31 },
+  { id: 29, first_name: "Morrie", last_name: "Rainard", email: "mrainards@yale.edu", shirt_size: "XS", company_name: "Podcat", donation: 52 },
+  { id: 30, first_name: "Fidel", last_name: "Roskelly", email: "froskellyt@ibm.com", shirt_size: "XS", company_name: "Avavee", donation: 5 },
+  { id: 31, first_name: "Toni", last_name: "MacSweeney", email: "tmacsweeneyu@parallels.com", shirt_size: "M", company_name: "Jaloo", donation: 82 },
+  { id: 32, first_name: "Jessey", last_name: "Walhedd", email: "jwalheddv@slashdot.org", shirt_size: "L", company_name: "Trilia", donation: 5 },
+  { id: 33, first_name: "Karola", last_name: "Piper", email: "kpiperw@ucsd.edu", shirt_size: "3XL", company_name: "Yombu", donation: 110 },
+  { id: 34, first_name: "Marley", last_name: "Mitchenson", email: "mmitchensonx@webeden.co.uk", shirt_size: "M", company_name: "Zoonoodle", donation: 97 },
+  { id: 35, first_name: "Marrilee", last_name: "Thrasher", email: "mthrashery@opensource.org", shirt_size: "XL", company_name: "Bluejam", donation: 17 },
+  { id: 36, first_name: "Tye", last_name: "Manie", email: "tmaniez@netscape.com", shirt_size: "L", company_name: "Kanoodle", donation: 30 },
+  { id: 37, first_name: "Charleen", last_name: "Sheering", email: "csheering10@mit.edu", shirt_size: "3XL", company_name: "Jatri", donation: 262 },
+  { id: 38, first_name: "Valma", last_name: "Eynaud", email: "veynaud11@archive.org", shirt_size: "XS", company_name: "Jaxbean", donation: 212 },
+  { id: 39, first_name: "Dollie", last_name: "McDarmid", email: "dmcdarmid12@tinyurl.com", shirt_size: "S", company_name: "Kayveo", donation: 74 },
+  { id: 40, first_name: "Minna", last_name: "Hymas", email: "mhymas13@cornell.edu", shirt_size: "XS", company_name: "Vimbo", donation: 101 },
+  { id: 41, first_name: "Jsandye", last_name: "Frend", email: "jfrend14@ca.gov", shirt_size: "XS", company_name: "Latz", donation: 156 },
+  { id: 42, first_name: "Yevette", last_name: "Hacket", email: "yhacket15@wp.com", shirt_size: "XL", company_name: "Lazzy", donation: 291 },
+  { id: 43, first_name: "Hank", last_name: "Zebedee", email: "hzebedee16@ezinearticles.com", shirt_size: "L", company_name: "Gigashots", donation: 241 },
+  { id: 44, first_name: "Jodie", last_name: "Stawell", email: "jstawell17@yale.edu", shirt_size: "S", company_name: "Jaxspan", donation: 262 },
+  { id: 45, first_name: "Falito", last_name: "Karsh", email: "fkarsh18@pcworld.com", shirt_size: "S", company_name: "Mycat", donation: 239 },
+  { id: 46, first_name: "Reginauld", last_name: "Purselowe", email: "rpurselowe19@thetimes.co.uk", shirt_size: "L", company_name: "Jabbersphere", donation: 11 },
+  { id: 47, first_name: "Vida", last_name: "Tydd", email: "vtydd1a@dropbox.com", shirt_size: "S", company_name: "Quaxo", donation: 55 },
+  { id: 48, first_name: "Anderea", last_name: "MacGiolla Pheadair", email: "amacgiollapheadair1b@xing.com", shirt_size: "2XL", company_name: "Kwimbee", donation: 214 },
+  { id: 49, first_name: "Bel", last_name: "Alway", email: "balway1c@ow.ly", shirt_size: "S", company_name: "Voolia", donation: 107 },
+  { id: 50, first_name: "Shell", last_name: "Baine", email: "sbaine1d@intel.com", shirt_size: "M", company_name: "Gabtype", donation: 171 },
+];
+
+
 
 /**
  * ### Challenge `getFullNames`
@@ -224,9 +322,25 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
-  /* CODE HERE */
-}
+
+
+
+function getFullNames(runners){
+  let fullNames = [];
+  
+  runners.forEach((element) => {
+    fullNames.push(`${element.last_name}, ${element.first_name}`);
+  });
+  return fullNames;
+};
+
+console.log(getFullNames(runners));
+
+
+
+
+
+
 
 /**
  * ### Challenge `firstNamesAllCaps`
@@ -240,9 +354,20 @@ function getFullNames(/* CODE HERE */) {
  * @returns an array with all the runners' first names in ALL CAPS.
  * The first names appear in the array in the same order the runners appear in the `runners` array.
 */
-function firstNamesAllCaps(/* CODE HERE */) {
-  /* CODE HERE */
-}
+function firstNamesAllCaps(runners){
+  const nameCaps = runners.map((element) => {
+    return element.first_name.toUpperCase();
+  });
+  return nameCaps;
+};
+
+
+console.log(firstNamesAllCaps(runners));
+
+
+
+
+
 
 /**
  * ### Challenge `getRunnersByTShirtSize`
@@ -257,9 +382,18 @@ function firstNamesAllCaps(/* CODE HERE */) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
-  /* CODE HERE */
+function getRunnersByTShirtSize(runners, tShirtSize){
+  const shirts = runners.filter(function(element){
+    if(element.shirt_size === tShirtSize)
+    return element.shirt_size;
+  });
+  return shirts;
 }
+
+console.log(getRunnersByTShirtSize(runners, "M"));
+
+
+
 
 /**
  * ### Challenge `tallyUpDonations`
@@ -271,9 +405,19 @@ function getRunnersByTShirtSize(/* CODE HERE */) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
-  /* CODE HERE */
+function tallyUpDonations(runners) {
+  const reduced = runners.reduce(function(acc, currentVal){
+    return acc + currentVal.donation;
+  }, 0);
+  return reduced;
 }
+
+console.log(tallyUpDonations(runners));
+
+
+
+
+
 
 /////////////// CLOSURES ///////////////
 /////////////// CLOSURES ///////////////
@@ -291,14 +435,28 @@ function tallyUpDonations(/* CODE HERE */) {
  * counter() // should return 2
  * etc
 */
-function counterMaker() {
-  // BROKEN CODE STARTS
-  const count = 0;
-  function counter() {
-    ++count
+
+function counterMaker(){
+  let count = 0
+
+  return function newCounter() {
+    return count++
   }
-  // BROKEN CODE ENDS
+  return newCounter;
 }
+
+const newCounter = counterMaker();
+
+console.log(newCounter());
+console.log(newCounter());
+console.log(newCounter());
+console.log(newCounter());
+console.log(newCounter());
+console.log(newCounter());
+
+console.log('****************');
+
+
 
 /**
  * ### Challenge `counterMakerWithLimit`
@@ -320,9 +478,23 @@ function counterMaker() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
-  /* CODE HERE */
+function counterMakerWithLimit(limit) {
+  let count = 0
+
+  return function() {
+    if (count > limit) {
+      count = 0
+    }
+    return count++
+  }
 }
+  
+  const counter = counterMakerWithLimit(3);
+  console.log(counter());
+  console.log(counter());
+  console.log(counter());
+  console.log(counter());
+  console.log(counter());
 
 /////////////// END OF CHALLENGE ///////////////
 /////////////// END OF CHALLENGE ///////////////
